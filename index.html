@@ -25,7 +25,7 @@
     </div>
 
     <div id="content">
-        <p class="loading">Sila pilih buku dari senarai di atas untuk melihat butiran dan ulasan.</p>
+        <p class="loading">Silakan pilih buku.</p>
     </div>
 
     <script>
@@ -52,14 +52,14 @@
                     });
                 }
             } catch (error) {
-                console.error("Gagal memuatkan senarai buku:", error);
+                console.error("Gagal memuat buku:", error);
                 document.getElementById('bookSelect').innerHTML = '<option value="">Gagal memuatkan data</option>';
             }
         }
 
         async function loadBookDetails(bookId) {
             if (!bookId) {
-                document.getElementById('content').innerHTML = '<p class="loading">Sila pilih buku dari senarai di atas.</p>';
+                document.getElementById('content').innerHTML = '<p class="loading">Silakan pilih buku.</p>';
                 return;
             }
 
