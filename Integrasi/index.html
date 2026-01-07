@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Integrasi TST</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #eceff1; padding: 40px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .selector { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .review-card { background: #fffde7; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 5px solid #fbc02d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Katalog Buku Terintegrasi</h1>
+        <div class="selector">
+            Pilih Buku: 
+            <select id="bookSelector" onchange="loadData(this.value)">
+                <option value="101">Laskar Pelangi</option>
+                <option value="102">Bumi Manusia</option>
+                <option value="103">Filosofi Kopi</option>
+            </select>
+        </div>
+        <div id="content">
+            <h2 id="title">Memuat...</h2>
+            <p><strong>Penulis:</strong> <span id="author">-</span> | <strong>Tahun:</strong> <span id="year">-</span></p>
+            <p id="synopsis">-</p>
+            <hr>
+            <h3>Rating: <span id="avg">0</span>/5 ⭐</h3>
+            <div id="review-list"></div>
+        </div>
+    </div>
+    <script>
+        function loadData(id) {
+            const list = document.getElementById('review-list');
+            list.innerHTML = "Memanggil data dari STB...";
+            fetch(`/book-details/${id}`)
+                .then(r => r.json())
+                .then(res => {
+                    const d = res.data;
+                    document.getElementById('title').innerText = d.book_info.title;
+                    document.getElementById('author').innerText = d.book_info.author;
+                    document.getElementById('year').innerText = d.book_info.published_year;
+                    document.getElementById('synopsis').innerText = d.book_info.synopsis;
+                    document.getElementById('avg').innerText = d.reviews_info.average_rating;
+                    list.innerHTML = "";
+                    d.reviews_info.user_reviews.forEach(rev => {
+                        list.innerHTML += `<div class="review-card"><strong>${rev.reviewer} (★ ${rev.rating})</strong><p>${rev.comment}</p></div>`;
+                    });
+                }).catch(e => alert("Koneksi STB Terputus!"));
+        }
+        window.onload = () => loadData('101');
+    </script>
+</body>
+</html>
