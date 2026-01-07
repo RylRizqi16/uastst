@@ -1,4 +1,4 @@
-# UAS Sistem Terdistribusi - Darryl & Farhan
+# UAS Sistem Terdistribusi - Darryl
 
 Repositori ini berisi implementasi Microservices menggunakan Docker dan Cloudflare Tunnel di STB.
 
