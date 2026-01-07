@@ -7,5 +7,5 @@ Repositori ini berisi implementasi Microservices menggunakan Docker dan Cloudfla
 - `/integrasi`: Berisi layanan agregator yang menggabungkan data Katalog dan Review (Port 8003).
 
 ### Akses Publik
-- **Katalog:** https://darryl.tugastst.my.id/books/101
+- **Katalog:** https://darryl.tugastst.my.id
 - **Integrasi:** https://integrasi-darryl.tugastst.my.id/
